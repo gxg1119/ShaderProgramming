@@ -21,7 +21,7 @@ public:
 	GLuint CreateBmpTexture(char * filePath);
 	   
 	void Test();
-
+	void Lecture2();
 private:
 	void Initialize(int windowSizeX, int windowSizeY);
 	bool ReadFile(char* filename, std::string *target);
@@ -50,5 +50,6 @@ private:
 
 	GLuint m_VBORect = 0;
 	GLuint m_SolidRectShader = 0;
-};
 
+	GLuint m_VBOLecture2 = 0;
+};
