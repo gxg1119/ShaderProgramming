@@ -536,10 +536,13 @@ void Renderer::Lecture3_Paritcle()
 
 	int uniformTime = glGetUniformLocation(shader, "u_Time");
 	glUniform1f(uniformTime, gTime);
-	gTime += 0.0001;
+
+	int uniformAccel = glGetUniformLocation(shader, "u_Accel");
+	glUniform3f(uniformAccel, 0.0, 10.0, 0.0);
+
+	gTime += 0.001;
 	if (gTime > 1.f) gTime = 0.f;
 
 	glDrawArrays(GL_TRIANGLES, 0, m_VBOManyParticleVertexCount);
-
 	glDisableVertexAttribArray(attribPosition);
 }
