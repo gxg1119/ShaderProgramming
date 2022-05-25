@@ -22,6 +22,7 @@ public:
 	   
 	void Test();
 	void Lecture2();
+	void Lecture3();
 private:
 	void Initialize(int windowSizeX, int windowSizeY);
 	bool ReadFile(char* filename, std::string *target);
@@ -52,4 +53,6 @@ private:
 	GLuint m_SolidRectShader = 0;
 
 	GLuint m_VBOLecture2 = 0;
+
+	GLuint m_Lecture3Shader = 0;
 };
