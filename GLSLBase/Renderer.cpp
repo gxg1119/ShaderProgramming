@@ -35,7 +35,7 @@ void Renderer::Initialize(int windowSizeX, int windowSizeY)
 	CreateVertexBufferObjects();
 
 	//Create Particles
-	CreateParticle(1000);
+	CreateParticle(1);
 
 	//Initialize camera settings
 	m_v3Camera_Position = glm::vec3(0.f, 0.f, 1000.f);
@@ -122,7 +122,7 @@ void Renderer::CreateParticle(int count)
 	int vertexCount = count * 3 * 2;
 
 	int index = 0;
-	float particleSize = 0.01f;
+	float particleSize = 0.1f;
 	for (int i = 0; i < count; i++)
 	{
 		float randomValueX = 0.f;
@@ -136,16 +136,16 @@ void Renderer::CreateParticle(int count)
 		float randomEmitTime = 0.f;
 		float randomLifeTime = 0.f;
 
-		randomValueX = ((float)rand() / (float)RAND_MAX - 0.5f) * 2.f; //-1~1
-		randomValueY = ((float)rand() / (float)RAND_MAX - 0.5f) * 2.f; //-1~1
+		randomValueX = 0.f;//((float)rand() / (float)RAND_MAX - 0.5f) * 2.f; //-1~1
+		randomValueY = 0.f;//((float)rand() / (float)RAND_MAX - 0.5f) * 2.f; //-1~1
 		randomValueZ = 0.f;
 
-		randomValueVX = ((float)rand() / (float)RAND_MAX - 0.5f) * 2.f; //-1~1
-		randomValueVY = ((float)rand() / (float)RAND_MAX - 0.5f) * 2.f; //-1~1
+		randomValueVX = 1.0f;// ((float)rand() / (float)RAND_MAX - 0.5f) * 2.f; //-1~1
+		randomValueVY = 0.f;//((float)rand() / (float)RAND_MAX - 0.5f) * 2.f; //-1~1
 		randomValueVZ = 0.f;
 
-		randomEmitTime = ((float)rand() / (float)RAND_MAX) * 5.f;
-		randomLifeTime = ((float)rand() / (float)RAND_MAX) * 2.f;
+		randomEmitTime = 0.0f;// ((float)rand() / (float)RAND_MAX) * 5.f;
+		randomLifeTime = 1.0f;//((float)rand() / (float)RAND_MAX) * 1.0f;
 
 		//v0
 		particleVertices[index] = -particleSize / 2.f + randomValueX;
@@ -577,7 +577,7 @@ void Renderer::Lecture3_Paritcle()
 	glUniform1f(uniformTime, gTime);
 
 	int uniformAccel = glGetUniformLocation(shader, "u_Accel");
-	glUniform3f(uniformAccel, 0.0, 1.0, 0.0);
+	glUniform3f(uniformAccel, 0.0, 0.0, 0.0);
 
 	gTime += 0.001;
 	if (gTime > 6.f) gTime = 0.f;
