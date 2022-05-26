@@ -24,6 +24,7 @@ public:
 	void Lecture2();
 	void Lecture3();
 	void Lecture3_Paritcle();
+	void ExamStar();
 
 private:
 	void Initialize(int windowSizeX, int windowSizeY);
@@ -63,4 +64,7 @@ private:
 
 	GLuint m_VBOManyParticle = 0;
 	GLuint m_VBOManyParticleVertexCount = 0;
+
+	GLuint m_VBOExamStar = 0;
+	GLuint m_ExamStarShader = 0;
 };
