@@ -10,6 +10,8 @@ uniform vec3 u_Accel;
 
 //bool bLoop = true; 숙제.. -> 시험이 나올 가능성이 있음
 
+float g_PI = 3.14;
+
 void main()
 {
 	vec3 newPos;
@@ -22,7 +24,9 @@ void main()
 		float fractional = fract(temp);
 		t = fractional * a_LifeTime;
 		tt = t * t;
-		newPos = a_Position + a_Velocity * t + 0.5 * u_Accel * tt;
+		newPos.x = a_Position.x + a_Velocity.x * t + 0.5 * u_Accel.x * tt;
+		newPos.y = a_Position.y + sin(t * 2.0 * g_PI);
+		newPos.z = 0;
 	}
 	else
 	{
