@@ -13,6 +13,7 @@ uniform vec3 u_Accel;
 //bool bLoop = true; 숙제.. -> 시험이 나올 가능성이 있음
 
 float g_PI = 3.14;
+mat3 g_RotMat = mat3(0, -1, 0, 1, 0, 0, 0, 0, 0);
 
 void main()
 {
@@ -30,8 +31,10 @@ void main()
 		float period = a_Period;
 		float amp = a_Amp;
 
-		newPos.x = a_Position.x + a_Velocity.x * t + 0.5 * u_Accel.x * tt;
-		newPos.y = a_Position.y + amp * sin(period * t * 2.0 * g_PI);
+		newPos = a_Position + a_Velocity * t + 0.5 * u_Accel * tt;
+
+		vec3 rotVec = normalize(a_Velocity * g_RotMat);
+		newPos = newPos + amp * rotVec * sin(period * t * 2.0 * g_PI);
 		newPos.z = 0;
 	}
 	else
