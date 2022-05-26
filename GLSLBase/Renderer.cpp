@@ -33,11 +33,13 @@ void Renderer::Initialize(int windowSizeX, int windowSizeY)
 
 	m_ExamStarShader = CompileShaders("./Shaders/star.vs", "./Shaders/star.fs");
 
+	m_FSSandboxShader = CompileShaders("./Shaders/FSSandbox.vs", "./Shaders/FSSandbox.fs");
+
 	//Create VBOs
 	CreateVertexBufferObjects();
 
 	//Create Particles
-	CreateParticle(1000);
+	//CreateParticle(1000);
 
 	//Initialize camera settings
 	m_v3Camera_Position = glm::vec3(0.f, 0.f, 1000.f);
@@ -172,6 +174,23 @@ void Renderer::CreateVertexBufferObjects()
 	glGenBuffers(1, &m_VBOExamStar);
 	glBindBuffer(GL_ARRAY_BUFFER, m_VBOExamStar);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(Exam), Exam, GL_STATIC_DRAW);
+
+	float rectSize = 0.5f;
+	float lecture4[]
+		=
+	{
+		-rectSize, -rectSize, 0.0, 1, 1, 1, 1,
+		 rectSize,  rectSize, 0.0, 1, 1, 1, 1,
+		-rectSize,  rectSize, 0.0, 1, 1, 1, 1, //triangle 1
+
+		-rectSize, -rectSize, 0.0, 1, 1, 1, 1,
+		 rectSize, -rectSize, 0.0, 1, 1, 1, 1,
+		 rectSize,  rectSize, 0.0, 1, 1, 1, 1, //triangle 1
+	};
+
+	glGenBuffers(1, &m_VBOSandbox);
+	glBindBuffer(GL_ARRAY_BUFFER, m_VBOSandbox);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(lecture4), lecture4, GL_STATIC_DRAW);
 }
 
 void Renderer::CreateParticle(int count)
@@ -783,4 +802,19 @@ void Renderer::ExamStar()
 
 	glDisableVertexAttribArray(attribPosition);
 
+}
+
+void Renderer::Lecture4_FSSandbox()
+{
+	GLuint shader = m_FSSandboxShader;
+	glUseProgram(shader);
+
+	int attribPosition = glGetAttribLocation(shader, "a_Position");
+	glEnableVertexAttribArray(attribPosition);
+	glBindBuffer(GL_ARRAY_BUFFER, m_VBOSandbox);
+	glVertexAttribPointer(attribPosition, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 7, 0);
+
+	glDrawArrays(GL_TRIANGLES, 0, 6);
+
+	glDisableVertexAttribArray(attribPosition);
 }

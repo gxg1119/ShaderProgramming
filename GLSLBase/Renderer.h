@@ -25,6 +25,7 @@ public:
 	void Lecture3();
 	void Lecture3_Paritcle();
 	void ExamStar();
+	void Lecture4_FSSandbox();
 
 private:
 	void Initialize(int windowSizeX, int windowSizeY);
@@ -67,4 +68,7 @@ private:
 
 	GLuint m_VBOExamStar = 0;
 	GLuint m_ExamStarShader = 0;
+
+	GLuint m_VBOSandbox = 0;
+	GLuint m_FSSandboxShader = 0;
 };
